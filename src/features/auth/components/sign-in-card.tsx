@@ -6,14 +6,20 @@ import { FcGoogle } from 'react-icons/fc'
 import { FaGithub } from 'react-icons/fa'
 import { SignInFlow } from "../types"
 import { useState } from "react"
+import { useAuthActions } from '@convex-dev/auth/react'
 
 interface SignInCardProps {
     setState: (state: SignInFlow) => void
 }
 
 export const SignInCard = ({ setState }: SignInCardProps) => {
+    const { signIn } = useAuthActions()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    const handleProviderSignIn = (value: "google" | "github") => {
+        signIn(value)
+    }
 
     return (
         <Card className="w-full h-full p-8">
@@ -53,7 +59,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
                         <FcGoogle className="size-5 absolute top-2.5 left-2.5" />
                         Continue with Google
                     </Button>
-                    <Button onClick={() => { }} variant={'outline'} className="w-full relative" size={'lg'} disabled={false}>
+                    <Button onClick={() => handleProviderSignIn('github')} variant={'outline'} className="w-full relative" size={'lg'} disabled={false}>
                         <FaGithub className="size-5 absolute top-2.5 left-2.5" />
                         Continue with Github
                     </Button>

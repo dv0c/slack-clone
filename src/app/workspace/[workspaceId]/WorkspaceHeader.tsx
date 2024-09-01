@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Doc } from "../../../../convex/_generated/dataModel"
 import { ChevronDown, ListFilter, SquarePen } from "lucide-react"
+import { Hint } from "@/app/hint"
 
 export const WorkspaceHeader = ({ workspace, isAdmin }: { workspace: Doc<'workspaces'>, isAdmin: boolean }) => {
     return (
@@ -38,11 +39,16 @@ export const WorkspaceHeader = ({ workspace, isAdmin }: { workspace: Doc<'worksp
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center gap-0.5">
-                <Button variant={'transparent'} size={'sm'}>
-                    <ListFilter className="size-4" />
-                </Button><Button variant={'transparent'} size={'sm'}>
-                    <SquarePen className="size-4" />
-                </Button>
+                <Hint label="Filter conversations" side="bottom" >
+                    <Button variant={'transparent'} size={'sm'}>
+                        <ListFilter className="size-4" />
+                    </Button>
+                </Hint>
+                <Hint label="New message" side="bottom" >
+                    <Button variant={'transparent'} size={'sm'}>
+                        <SquarePen className="size-4" />
+                    </Button>
+                </Hint>
             </div>
         </div>
     )
